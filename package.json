@@ -1,0 +1,29 @@
+{
+  "name": "boundseer",
+  "version": "0.1.0",
+  "description": "Show layout bounds on your page.",
+  "scripts": {
+    "clean": "rm -rf dist",
+    "build": "tsc -p tsconfig.json"
+  },
+  "keywords": [
+    "dom",
+    "layout",
+    "layout-bounds",
+    "debug",
+    "developer-tools",
+    "overlay",
+    "browser"
+  ],
+  "author": "Comardom",
+  "license": "MIT",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "devDependencies": {
+    "typescript": "^7.0.2"
+  }
+}

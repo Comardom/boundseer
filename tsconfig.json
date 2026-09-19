@@ -1,0 +1,34 @@
+{
+  "compilerOptions": {
+    // 编译后的 JavaScript 语法版本
+    "target": "ES2020",
+    // 模块系统，保留原生 import/export
+    "module": "ESNext",
+    // 解析 import 路径时，按照现代打包工具的规则处理
+    "moduleResolution": "Bundler",
+    // 引入 JavaScript 和浏览器 DOM API 的类型定义
+    "lib": ["ES2020", "DOM"],
+    // 源码根目录
+    "rootDir": "src",
+    // 编译输出目录
+    "outDir": "dist",
+    // 生成 TypeScript 类型声明文件，例如 .d.ts
+    "declaration": true,
+    // 改善 CommonJS 模块与 ES Module 之间的导入兼容性
+    "esModuleInterop": true,
+    // 强制文件名大小写与 import 路径保持一致
+    "forceConsistentCasingInFileNames": true,
+    // 开启严格类型检查
+    "strict": true,
+    // 跳过第三方类型声明文件的检查
+    "skipLibCheck": true,
+    // 要求每个文件都可以独立转换
+    "isolatedModules": true,
+    // 强制显式区分类型导入和运行时导入
+    "verbatimModuleSyntax": true
+  },
+  // 只检查和编译 src 目录中的 TypeScript 文件
+  "include": ["src"],
+  // dist是生成结果，不应该再次编译，node_modules 是第三方依赖，不应该作为源码编译
+  "exclude": ["node_modules", "dist"]
+}
