@@ -53,7 +53,7 @@ body.${ACTIVE_CLASS} canvas {
 }
 
 body.${ACTIVE_CLASS} * {
-  outline: 2px solid black;
+  outline: 2px solid black !important;
 }
 `
 export { ACTIVE_CLASS, styles , STYLE_ID}

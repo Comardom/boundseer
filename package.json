@@ -1,6 +1,6 @@
 {
   "name": "boundseer",
-  "version": "0.3.0",
+  "version": "0.3.2",
   "description": "Show layout bounds on your page.",
   "private": false,
   "scripts": {
