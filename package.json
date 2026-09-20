@@ -1,10 +1,12 @@
 {
   "name": "boundseer",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Show layout bounds on your page.",
   "scripts": {
+    "build": "tsdown",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
     "clean": "rm -rf dist",
-    "build": "tsc -p tsconfig.json"
+    "prepublishOnly": "pnpm build"
   },
   "keywords": [
     "dom",
@@ -18,12 +20,20 @@
   "author": "Comardom",
   "license": "MIT",
   "type": "module",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.mts",
+      "import": "./dist/index.mjs",
+      "default": "./dist/index.mjs"
+    }
+  },
   "files": [
     "dist"
   ],
   "devDependencies": {
+    "tsdown": "^0.23.0",
     "typescript": "^7.0.2"
   }
 }

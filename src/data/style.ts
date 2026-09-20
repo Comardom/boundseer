@@ -1,4 +1,5 @@
 const ACTIVE_CLASS = 'bdsr-active'
+const STYLE_ID = 'boundseer-style'
 
 const styles = `
 body.${ACTIVE_CLASS} {
@@ -55,4 +56,4 @@ body.${ACTIVE_CLASS} * {
   outline: 2px solid black;
 }
 `
-export { ACTIVE_CLASS, styles }
+export { ACTIVE_CLASS, styles , STYLE_ID}

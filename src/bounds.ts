@@ -1,7 +1,7 @@
-import type {RefState} from "./state";
-import {createRefState} from "./state";
-import { ACTIVE_CLASS, styles } from './data/style'
-import {getNumOfChangedElements} from "./utils/checkElements";
+import type {RefState} from "./utils/state";
+import {createRefState} from "./utils/state";
+import { ACTIVE_CLASS, styles, STYLE_ID } from './data/style'
+import {getNumOfVisibleElements} from "./utils/checkElements";
 
 let refRootState:RefState = createRefState();
 let styleEl: HTMLStyleElement | null = null
@@ -20,7 +20,7 @@ function on():number {
     refRootState.plusRefCount();
     console.log("layout bounds show");
     // 临时显示这个
-    return getNumOfChangedElements();
+    return getNumOfVisibleElements();
 }
 function off():number {
     // 如果计数为零就退出
@@ -37,7 +37,7 @@ function off():number {
     refRootState.minusRefCount();
     console.log("layout bounds are hidden");
     // 临时显示这个
-    return getNumOfChangedElements();
+    return getNumOfVisibleElements();
 }
 
 function injectStyle():boolean {
@@ -47,6 +47,8 @@ function injectStyle():boolean {
     // 创建并填充CSS
     styleEl = document.createElement('style');
     styleEl.textContent = styles
+    // 添加ID方便DevTools中识别
+    styleEl.id = STYLE_ID
     // 加入CSS后给body上class
     document.head.appendChild(styleEl);
     document.body.classList.add(ACTIVE_CLASS);

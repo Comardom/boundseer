@@ -1,4 +1,19 @@
 # Changelog
+## [0.3.0] - 2026-09-20
+
+### Added
+
+* 增加 ESM 构建产物。
+* 增加 IIFE 构建产物。
+* 支持在不使用构建工具的原生 HTML、CSS、JavaScript 项目中使用。
+* 增加 TypeScript 类型声明。
+* 增加 `Window.bdsr` 全局类型声明。
+
+### Changed
+
+* 使用 `tsdown` 作为库构建工具。
+* 调整 npm 包入口和 `exports` 配置。
+* 修改on和off返回值的函數名
 
 ## [0.2.0] - 2026-09-20
 

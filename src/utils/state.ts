@@ -1,4 +1,4 @@
-interface RefState{
+interface RefState {
     readonly refCount: number;
     plusRefCount():void;
     minusRefCount():void;

@@ -6,7 +6,7 @@ function isVisible(e:Element):boolean {
         || e.getClientRects().length === 0
     );
 }
-function getNumOfChangedElements():number{
+function getNumOfVisibleElements():number {
     const body = document.body;
     if (!body) {
         return 0;
@@ -26,4 +26,4 @@ function getNumOfChangedElements():number{
     return elementCount;
 }
 
-export {isVisible, getNumOfChangedElements};
+export {isVisible, getNumOfVisibleElements};
