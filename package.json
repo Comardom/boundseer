@@ -2,6 +2,7 @@
   "name": "boundseer",
   "version": "0.3.0",
   "description": "Show layout bounds on your page.",
+  "private": false,
   "scripts": {
     "build": "tsdown",
     "typecheck": "tsc -p tsconfig.json --noEmit",
