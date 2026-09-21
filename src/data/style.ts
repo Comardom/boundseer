@@ -1,5 +1,8 @@
+// 用于给各种元素加上的类的名字
 const ActiveClass = 'bdsr-active'
+// ID，不是直接写在CSS里的
 const StyleId = 'boundseer-style'
+// 这里没有svg
 const htmlTags = [
     'a',
     'abbr',
@@ -156,6 +159,7 @@ function createTagStyles(
     // 使用join来拼接数组成为字符串
     return resultStyle.join('')
 }
+// 下面的三个语句，分别是svg、svg内部标签、其他标签
 const fullStyles = `
     body.${ActiveClass} {
       outline: 2px solid hsl(0 90% 55%) !important;

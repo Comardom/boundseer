@@ -1,10 +1,20 @@
 # Changelog
+## [0.4.2] - 2026-09-22
+
+### Added
+
+* 加入了一些注释
+
+### Fixed
+
+* 删除了CHANGELOG中一个多余的*
+
 ## [0.4.1] - 2026-09-22
 
 ### Added
 
 * 在package.json中加入了公开发布的属性
-* 
+
 ### Fixed
 
 * 修复了README中一个语意不明的地方

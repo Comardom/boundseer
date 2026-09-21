@@ -6,10 +6,13 @@ declare global {
         bdsr: Bdsr
     }
 }
+// 向window挂一个对象
 const bdsr = {
     on,
     off,
 };
+window.bdsr = bdsr;
+// 向window挂需要执行的内容
 for (const cmd of StraightOnCmd) {
     Object.defineProperty(window, `${ cmd }`, {
         configurable: true,
@@ -26,5 +29,4 @@ for (const cmd of StraightOffCmd) {
         },
     })
 }
-window.bdsr = bdsr;
 export type { Bdsr }
