@@ -9,5 +9,5 @@ export default defineConfig({
     clean: true,
     // 生成d.ts类型声明
     dts: true,
-    globalName: 'boundseer',
+    globalName: 'bdsr',
 })

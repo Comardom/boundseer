@@ -1,59 +1,170 @@
-const ACTIVE_CLASS = 'bdsr-active'
-const STYLE_ID = 'boundseer-style'
-
-const styles = `
-body.${ACTIVE_CLASS} {
-  outline: 2px solid #ff0000 !important;
+const ActiveClass = 'bdsr-active'
+const StyleId = 'boundseer-style'
+const htmlTags = [
+    'a',
+    'abbr',
+    'address',
+    'area',
+    'article',
+    'aside',
+    'audio',
+    'b',
+    'base',
+    'bdi',
+    'bdo',
+    'blockquote',
+    'br',
+    'button',
+    'canvas',
+    'caption',
+    'cite',
+    'code',
+    'col',
+    'colgroup',
+    'data',
+    'datalist',
+    'dd',
+    'del',
+    'details',
+    'dfn',
+    'dialog',
+    'div',
+    'dl',
+    'dt',
+    'em',
+    'embed',
+    'fieldset',
+    'figcaption',
+    'figure',
+    'footer',
+    'form',
+    'h1',
+    'h2',
+    'h3',
+    'h4',
+    'h5',
+    'h6',
+    'header',
+    'hgroup',
+    'hr',
+    'i',
+    'iframe',
+    'img',
+    'input',
+    'ins',
+    'kbd',
+    'label',
+    'legend',
+    'li',
+    'link',
+    'main',
+    'map',
+    'mark',
+    'menu',
+    'meta',
+    'meter',
+    'nav',
+    'noscript',
+    'object',
+    'ol',
+    'optgroup',
+    'option',
+    'output',
+    'p',
+    'picture',
+    'pre',
+    'progress',
+    'q',
+    'rp',
+    'rt',
+    'ruby',
+    's',
+    'samp',
+    'search',
+    'section',
+    'select',
+    'script',
+    'slot',
+    'small',
+    'source',
+    'span',
+    'strong',
+    'style',
+    'sub',
+    'summary',
+    'sup',
+    'table',
+    'tbody',
+    'td',
+    'template',
+    'textarea',
+    'tfoot',
+    'th',
+    'thead',
+    'time',
+    'title',
+    'tr',
+    'track',
+    'u',
+    'ul',
+    'var',
+    'video',
+    'wbr',
+] as const
+// 不含 svg 本身，svg 本身单独生成规则，其余 SVG 元素限定在 svg 内，避免覆盖同名 HTML 标签
+const svgTags = [
+    'a',
+    'circle',
+    'clipPath',
+    'defs',
+    'ellipse',
+    'g',
+    'image',
+    'line',
+    'linearGradient',
+    'mask',
+    'path',
+    'pattern',
+    'polygon',
+    'polyline',
+    'radialGradient',
+    'rect',
+    'stop',
+    'symbol',
+    'text',
+    'textPath',
+    'tspan',
+    'use',
+] as const
+// 明显不同的基础色相，比 360 均分更容易用肉眼区分
+const huePalette = [0, 120, 240, 60, 180, 300, 30, 150, 270, 90, 210, 330] as const
+function createTagStyles(
+    tags: readonly string[],
+    paletteOffset: number,
+    parent = '',
+): string {
+    const resultStyle: string[] = tags.map(
+        (tag: string, index: number): string => {
+            const paletteIndex = index + paletteOffset
+            const hue: number = huePalette[paletteIndex % huePalette.length]
+            const cycle: number = Math.floor(paletteIndex / huePalette.length)
+            const lightness: number = 45 + (cycle % 3) * 12
+            const selector = parent ? `${parent} ${tag}` : tag
+            return `body.${ActiveClass} ${selector} { outline: 2px solid hsl(${hue} 90% ${lightness}%) !important; }`
+        }
+    )
+    // 使用join来拼接数组成为字符串
+    return resultStyle.join('')
 }
-
-body.${ACTIVE_CLASS} main {
-  outline: 2px solid #ff7a00 !important;
-}
-
-body.${ACTIVE_CLASS} section {
-  outline: 2px solid #ffe600 !important;
-}
-
-body.${ACTIVE_CLASS} div {
-  outline: 2px solid #00c853 !important;
-}
-
-body.${ACTIVE_CLASS} article {
-  outline: 2px solid #00b8d4 !important;
-}
-
-body.${ACTIVE_CLASS} p {
-  outline: 2px solid #2979ff !important;
-}
-
-body.${ACTIVE_CLASS} span {
-  outline: 2px solid #7c4dff !important;
-}
-
-body.${ACTIVE_CLASS} button {
-  outline: 2px solid #d500f9 !important;
-}
-
-body.${ACTIVE_CLASS} input,
-body.${ACTIVE_CLASS} textarea,
-body.${ACTIVE_CLASS} select {
-  outline: 2px solid #ff4081 !important;
-}
-
-body.${ACTIVE_CLASS} ul,
-body.${ACTIVE_CLASS} ol,
-body.${ACTIVE_CLASS} li {
-  outline: 2px solid #795548 !important;
-}
-
-body.${ACTIVE_CLASS} img,
-body.${ACTIVE_CLASS} video,
-body.${ACTIVE_CLASS} canvas {
-  outline: 2px solid #607d8b !important;
-}
-
-body.${ACTIVE_CLASS} * {
-  outline: 2px solid black !important;
-}
+const fullStyles = `
+    body.${ActiveClass} {
+      outline: 2px solid hsl(0 90% 55%) !important;
+    }
+    body.${ActiveClass} * {
+      outline: 2px solid black !important;
+    }
+    ${createTagStyles(['svg'], 6)}
+    ${createTagStyles(svgTags, 6, 'svg')}
+    ${createTagStyles(htmlTags, 0)}
 `
-export { ACTIVE_CLASS, styles , STYLE_ID}
+export { ActiveClass, fullStyles , StyleId}

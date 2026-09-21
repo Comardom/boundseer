@@ -1,6 +1,6 @@
 import type {RefState} from "./utils/state";
 import {createRefState} from "./utils/state";
-import { ACTIVE_CLASS, styles, STYLE_ID } from './data/style'
+import { ActiveClass, fullStyles, StyleId } from './data/style'
 import {getNumOfVisibleElements} from "./utils/checkElements";
 
 let refRootState:RefState = createRefState();
@@ -46,12 +46,12 @@ function injectStyle():boolean {
     }
     // 创建并填充CSS
     styleEl = document.createElement('style');
-    styleEl.textContent = styles
+    styleEl.textContent = fullStyles
     // 添加ID方便DevTools中识别
-    styleEl.id = STYLE_ID
+    styleEl.id = StyleId
     // 加入CSS后给body上class
     document.head.appendChild(styleEl);
-    document.body.classList.add(ACTIVE_CLASS);
+    document.body.classList.add(ActiveClass);
     return true;
 }
 function removeStyle():boolean {
@@ -59,7 +59,7 @@ function removeStyle():boolean {
         return false;
     }
     // 删除body的这个class
-    document.body.classList.remove(ACTIVE_CLASS);
+    document.body.classList.remove(ActiveClass);
     // 释放这个对象
     styleEl.remove();
     styleEl = null;
