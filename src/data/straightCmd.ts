@@ -1,4 +1,4 @@
-const StraightOnCmd: string[] =  [
+const StraightOnCmd: string[] = [
     '边来',
     '示廓',
     '显示边界',
@@ -12,7 +12,7 @@ const StraightOnCmd: string[] =  [
     '枠表示',
     'わくひょうじ',
 ];
-const StraightOffCmd: string[] =  [
+const StraightOffCmd: string[] = [
     '边去',
     '隐藏轮廓',
     '隐藏边界',
@@ -26,4 +26,47 @@ const StraightOffCmd: string[] =  [
     '枠非表示',
     'わくひひょうじ',
 ];
-export { StraightOnCmd, StraightOffCmd };
+const StraightPersistCmd: string[] = [
+    '没有没有通过',
+    '持久化',
+    '永远',
+    '同步',
+    '永続化',
+    'えいぞくか',
+    '永遠',
+    'えいえん',
+    '永久',
+    'えいきゅう',
+    '同期',
+    'どうき',
+];
+const StraightPersistFalseCmd: string[] = [
+    '关闭持久化',
+    '停止持久化',
+    '孤立',
+    '關閉持久化',
+    '永続化なし',
+    'えいぞくかなし',
+    '永遠じゃない',
+    'えいえんじゃない',
+    '永久じゃない',
+    'えいきゅうじゃない',
+    '同期なし',
+    'どうきなし',
+    'こりつ',
+];
+const StraightResetCmd: string[] = [
+    '重置',
+    '虫豸',
+    '初始化',
+    '大清洗',
+    '友爱部101室',
+    '友愛部101號房',
+    '蟲豸',
+    'リセット',
+    '初期化',
+    'しょきか',
+    '再設定',
+    'さいせってい',
+];
+export { StraightOnCmd, StraightOffCmd, StraightPersistCmd, StraightPersistFalseCmd, StraightResetCmd };

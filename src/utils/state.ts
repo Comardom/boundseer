@@ -1,20 +1,15 @@
-interface RefState {
-    readonly refCount: number;
-    plusRefCount():void;
-    minusRefCount():void;
+interface State {
+    stateCode: number;
 }
-function createRefState():RefState {
-    let refCount = 0;
+function createState():State {
+    let code = 0;
     return {
-        get refCount(): number {
-            return refCount;
+        get stateCode(): number {
+            return code;
         },
-        plusRefCount(): void {
-            refCount++;
-        },
-        minusRefCount(): void {
-            refCount--;
+        set stateCode(value:number) {
+            code = value;
         },
     };
 }
-export {type RefState, createRefState};
+export {type State, createState};

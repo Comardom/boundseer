@@ -1,5 +1,8 @@
 interface Bdsr {
-  on(): number;
-  off(): number;
+    setupBoundseer(): void;
+    on(): number;
+    off(): number;
+    persist(_?: boolean): void;
+    reset(): void;
 }
 export type { Bdsr };

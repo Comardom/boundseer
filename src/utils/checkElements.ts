@@ -1,3 +1,14 @@
+function whenDomReady(callback: () => void): void {
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded',
+            callback,
+            { once: true }
+        );
+    }
+    else {
+        callback();
+    }
+}
 function isVisible(e:Element):boolean {
     const style = window.getComputedStyle(e);
     return !(
@@ -26,4 +37,4 @@ function getNumOfVisibleElements():number {
     return elementCount;
 }
 
-export {isVisible, getNumOfVisibleElements};
+export { isVisible, getNumOfVisibleElements, whenDomReady };

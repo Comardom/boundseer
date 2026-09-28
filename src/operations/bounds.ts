@@ -1,13 +1,13 @@
-import type {RefState} from "./utils/state";
-import {createRefState} from "./utils/state";
-import { ActiveClass, fullStyles, StyleId } from './data/style'
-import {getNumOfVisibleElements} from "./utils/checkElements";
+import {rootState, StorageKey} from "../runtimeState";
+import { ActiveClass, fullStyles, StyleId } from '../data/styleForType'
+import { getNumOfVisibleElements } from "../utils/checkElements";
+import { digit, setDigit } from "../utils/digit";
 
-let refRootState:RefState = createRefState();
+
 let styleEl: HTMLStyleElement | null = null
 function on():number {
-    // 如果计数不为零就退出
-    if(refRootState.refCount) {
+    // 如果code不为零就退出
+    if(digit(rootState.stateCode,0)) {
         console.log("already exists");
         return -1;
     }
@@ -16,15 +16,18 @@ function on():number {
         console.log('failed to inject style')
         return -1;
     }
-    // 增加引用计数
-    refRootState.plusRefCount();
+    // 设置开启状态
+    rootState.stateCode = setDigit(rootState.stateCode,0,1);
+    if(localStorage.getItem(StorageKey)) {
+        localStorage.setItem(StorageKey, '1');
+    }
     console.log("layout bounds show");
     // 临时显示这个
     return getNumOfVisibleElements();
 }
 function off():number {
-    // 如果计数为零就退出
-    if(!refRootState.refCount){
+    // 如果code为零就退出
+    if(!digit(rootState.stateCode,0)){
         console.log("not exists");
         return -1;
     }
@@ -33,8 +36,11 @@ function off():number {
         console.log('failed to remove style')
         return -1;
     }
-    // 减少引用计数
-    refRootState.minusRefCount();
+    // 设置关闭状态
+    rootState.stateCode = setDigit(rootState.stateCode,0,0);
+    if(localStorage.getItem(StorageKey)) {
+        localStorage.setItem(StorageKey, '0');
+    }
     console.log("layout bounds are hidden");
     // 临时显示这个
     return getNumOfVisibleElements();

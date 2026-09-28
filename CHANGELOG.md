@@ -1,4 +1,29 @@
 # Changelog
+## [0.5.0] - 2026-09-28
+
+### Added
+
+* 增加 `bdsr.setupBoundseer()`，用于显式完成 boundseer 初始化。
+* 增加 `bdsr.persist()`，启用边界显示状态持久化。
+* 增加 `bdsr.persist(false)`，关闭边界显示状态持久化。
+* 增加 `bdsr.reset()`，清除当前页面的持久化状态、注销跨标签页监听并关闭边界显示。
+* 使用 localStorage 保存持久化开关状态。
+* 支持页面刷新后恢复已持久化的边界显示状态。
+* 支持同源标签页之间同步持久化开关状态。
+* 增加启用持久化、关闭持久化和重置状态相关的控制台快捷命令。
+* 增加 `whenDomReady()`，用于在 DOM 就绪后执行恢复或状态同步操作。
+* 在 README 中加入 GitHub 仓库链接。
+
+### Changed
+
+* 将默认边界操作拆分到 `operations/bounds.ts`。
+* 增加 `operations/persistence.ts`，用于处理持久化状态和跨标签页同步。
+* 增加 `operations/preDoes.ts`，用于恢复保存的状态。
+* 增加 `runtimeState.ts`，集中保存运行时状态和 storage key。
+* 使用状态码区分当前边界显示状态与持久化状态。
+* 将调试样式数据文件从 `style.ts` 重命名为 `styleForType.ts`。
+* 更新 ESM、IIFE、SSR 与多语言 README 的初始化说明。
+
 ## [0.4.2] - 2026-09-22
 
 ### Added
