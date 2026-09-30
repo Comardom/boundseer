@@ -10,15 +10,20 @@ function restoreStateCodeFromLocalStorage(): void {
         // 持久化开启，边界开启
         rootState.stateCode = setDigit(rootState.stateCode, 1, 1);
         rootState.stateCode = setDigit(rootState.stateCode, 0, 1);
-        return;
     }
-    if (value === '0') {
+    else if (value === '0') {
         // 持久化开启，边界关闭
         rootState.stateCode = setDigit(rootState.stateCode, 1, 1);
         rootState.stateCode = setDigit(rootState.stateCode, 0, 0);
+    }
+    else if (value === null) {
+        rootState.stateCode = setDigit(rootState.stateCode, 1, 0);
+    }
+    else {
+        console.warn("error in restoreStateCodeFromLocalStorage");
         return;
     }
-    rootState.stateCode = setDigit(rootState.stateCode, 1, 0);
+    console.log("restoreStateCodeFromLocalStorage done");
 }
 function onceOnWhenStart(on: () => number, off: () => number): void {
     if (digit(rootState.stateCode, 1) === 0) {
@@ -26,10 +31,18 @@ function onceOnWhenStart(on: () => number, off: () => number): void {
     }
     if (digit(rootState.stateCode, 0) === 1) {
         whenDomReady(on);
+    }
+    else if (digit(rootState.stateCode, 0) === 0) {
+        whenDomReady(off);
+    }
+    // else if (digit(rootState.stateCode,1) === 2) {
+    //     return;
+    // }
+    else {
+        console.warn("unknown error on stateCode");
         return;
     }
-    whenDomReady(off);
-    return;
+    console.log("entrance resume done");
 }
 
 function preDoesOnStart(on: () => number, off: () => number): void {

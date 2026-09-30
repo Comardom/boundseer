@@ -7,7 +7,7 @@ import { digit, setDigit } from "../utils/digit";
 let styleEl: HTMLStyleElement | null = null
 function on():number {
     // 如果code不为零就退出
-    if(digit(rootState.stateCode,0)) {
+    if(digit(rootState.stateCode,0) && styleEl) {
         console.log("already exists");
         return -1;
     }
@@ -27,7 +27,7 @@ function on():number {
 }
 function off():number {
     // 如果code为零就退出
-    if(!digit(rootState.stateCode,0)){
+    if(!digit(rootState.stateCode,0) && !styleEl) {
         console.log("not exists");
         return -1;
     }
