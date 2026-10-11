@@ -6,7 +6,7 @@ So I'd like to mimic this Google's idea in this project called **boundseer**.<br
 [Go to repo in GitHub](https://github.com/Comardom/boundseer)
 ## attention
 it's browser only, and it has ESM and IIFE<br />
-on() and off() return the number of visible elements detected on the page, and failure get -1<br />
+on() and off() now return 1 when ok, and failure get -1<br />
 in SSR, please make sure boundseer runs in browser, like this:
 ```html
 <!doctype html>

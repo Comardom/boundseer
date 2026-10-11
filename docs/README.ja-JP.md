@@ -6,7 +6,7 @@ Androidでは、「設定」を開くと、「開発」または「開発者向�
 [GitHub-repo](https://github.com/Comardom/boundseer)
 ## 強調
 browser-only、distにESMとIIFEがあります<br />
-on()とoff()のreturnは可視要素数です；失敗して、-1です<br />
+on()とoff()のreturnは、成功した、1です；失敗して、-1です（now）<br />
 SSRのページじゃ、scriptがbrowser上で実行されるようにする必要があります、このように：
 ```html
 <!doctype html>

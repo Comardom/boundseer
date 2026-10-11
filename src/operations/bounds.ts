@@ -23,7 +23,8 @@ function on():number {
     }
     console.log("layout bounds show");
     // 临时显示这个
-    return getNumOfVisibleElements();
+    // return getNumOfVisibleElements();
+    return 1;
 }
 function off():number {
     // 如果code为零就退出
@@ -43,7 +44,8 @@ function off():number {
     }
     console.log("layout bounds are hidden");
     // 临时显示这个
-    return getNumOfVisibleElements();
+    // return getNumOfVisibleElements();
+    return 1;
 }
 
 function injectStyle():boolean {

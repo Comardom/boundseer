@@ -5,7 +5,7 @@
 [去GitHub看仓库](https://github.com/Comardom/boundseer)
 ## 强调
 此工具为浏览器调试工具，dist包含ESM和IIFE两种产物<br />
-on()和off()的返回值是页面上可见元素数量，失败返回-1<br />
+on()和off()的返回值暂时是成功返回1，失败返回-1<br />
 SSR框架的网页，请保证脚本跑在浏览器而不是服务器上，就像这样：
 ```html
 <!doctype html>

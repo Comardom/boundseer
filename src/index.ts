@@ -15,6 +15,7 @@ declare global {
         bdsr: Bdsr;
     }
 }
+const isBrowser = typeof window !== 'undefined';
 // 向window挂一个对象
 const bdsr = {
     setupBoundseer,
@@ -23,8 +24,12 @@ const bdsr = {
     persist,
     reset,
 };
-window.bdsr = bdsr;
+isBrowser ? window.bdsr = bdsr : console.warn(`Browser does not support bdsr ${bdsr}`);
 function setupBoundseer():void {
+    if(!isBrowser) {
+        console.warn(`Browser does not support bdsr ${bdsr}`);
+        return;
+    }
     // 向window挂需要执行的内容
     for(const cmd of StraightOnCmd) {
         Object.defineProperty(window, `${ cmd }`, {

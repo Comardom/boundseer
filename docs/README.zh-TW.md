@@ -5,7 +5,7 @@
 [去GitHub看倉庫](https://github.com/Comardom/boundseer)
 ## highlight
 瀏覽器-only，dist裡有ESM和IIFE<br />
-on()和off()返回頁面可見元素數量，失敗返回-1<br />
+on()和off()暫時成功返回1，失敗返回-1<br />
 SSR頁面要確保腳本在瀏覽器上執行，而非遠端伺服器，像這樣：
 ```html
 <!doctype html>
