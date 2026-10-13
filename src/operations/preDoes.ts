@@ -1,23 +1,21 @@
-import { digit, setDigit } from "../utils/digit";
 import { whenDomReady } from "../utils/checkElements";
 import { StorageKey, rootState } from "../runtimeState"
 import { registerOtherTabsWatcher } from "./persistence";
+import { isBoundsActive, isPersistenceActive, setBounds, setPersistence } from "../utils/state";
 
 
 function restoreStateCodeFromLocalStorage(): void {
     const value = localStorage.getItem(StorageKey);
     if (value === '1') {
         // 持久化开启，边界开启
-        rootState.stateCode = setDigit(rootState.stateCode, 1, 1);
-        rootState.stateCode = setDigit(rootState.stateCode, 0, 1);
+        rootState.stateCode = setPersistence(setBounds(rootState.stateCode, true), true);
     }
     else if (value === '0') {
         // 持久化开启，边界关闭
-        rootState.stateCode = setDigit(rootState.stateCode, 1, 1);
-        rootState.stateCode = setDigit(rootState.stateCode, 0, 0);
+        rootState.stateCode = setPersistence(setBounds(rootState.stateCode, false), true);
     }
     else if (value === null) {
-        rootState.stateCode = setDigit(rootState.stateCode, 1, 0);
+        rootState.stateCode = setPersistence(rootState.stateCode, false);
     }
     else {
         console.warn("error in restoreStateCodeFromLocalStorage");
@@ -26,18 +24,15 @@ function restoreStateCodeFromLocalStorage(): void {
     console.log("restoreStateCodeFromLocalStorage done");
 }
 function onceOnWhenStart(on: () => number, off: () => number): void {
-    if (digit(rootState.stateCode, 1) === 0) {
+    if (!isPersistenceActive(rootState.stateCode)) {
         return;
     }
-    if (digit(rootState.stateCode, 0) === 1) {
+    if (isBoundsActive(rootState.stateCode)) {
         whenDomReady(on);
     }
-    else if (digit(rootState.stateCode, 0) === 0) {
+    else if (!isBoundsActive(rootState.stateCode)) {
         whenDomReady(off);
     }
-    // else if (digit(rootState.stateCode,1) === 2) {
-    //     return;
-    // }
     else {
         console.warn("unknown error on stateCode");
         return;
@@ -50,4 +45,4 @@ function preDoesOnStart(on: () => number, off: () => number): void {
     onceOnWhenStart(on, off);
     registerOtherTabsWatcher();
 }
-export { rootState, StorageKey, preDoesOnStart };
+export { StorageKey, preDoesOnStart };

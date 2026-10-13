@@ -1,13 +1,11 @@
-import {rootState, StorageKey} from "../runtimeState";
+import { rootState, StorageKey } from "../runtimeState";
 import { ActiveClass, fullStyles, StyleId } from '../data/styleForType'
-import { getNumOfVisibleElements } from "../utils/checkElements";
-import { digit, setDigit } from "../utils/digit";
+import { isBoundsActive, setBounds } from "../utils/state";
 
 
 let styleEl: HTMLStyleElement | null = null
 function on():number {
-    // 如果code不为零就退出
-    if(digit(rootState.stateCode,0) && styleEl) {
+    if(isBoundsActive(rootState.stateCode) && styleEl) {
         console.log("already exists");
         return -1;
     }
@@ -17,18 +15,15 @@ function on():number {
         return -1;
     }
     // 设置开启状态
-    rootState.stateCode = setDigit(rootState.stateCode,0,1);
+    rootState.stateCode = setBounds(rootState.stateCode, true);
     if(localStorage.getItem(StorageKey)) {
         localStorage.setItem(StorageKey, '1');
     }
     console.log("layout bounds show");
-    // 临时显示这个
-    // return getNumOfVisibleElements();
     return 1;
 }
 function off():number {
-    // 如果code为零就退出
-    if(!digit(rootState.stateCode,0) && !styleEl) {
+    if(!isBoundsActive(rootState.stateCode) && !styleEl) {
         console.log("not exists");
         return -1;
     }
@@ -38,13 +33,11 @@ function off():number {
         return -1;
     }
     // 设置关闭状态
-    rootState.stateCode = setDigit(rootState.stateCode,0,0);
+    rootState.stateCode = setBounds(rootState.stateCode, false);
     if(localStorage.getItem(StorageKey)) {
         localStorage.setItem(StorageKey, '0');
     }
     console.log("layout bounds are hidden");
-    // 临时显示这个
-    // return getNumOfVisibleElements();
     return 1;
 }
 

@@ -1,15 +1,15 @@
-import { digit, setDigit } from "../utils/digit";
 import { StorageKey, rootState } from "../runtimeState";
 import { whenDomReady } from "../utils/checkElements";
 import { off, on } from "./bounds";
+import { isBoundsActive, isPersistenceActive, setPersistence } from "../utils/state";
 
 
 function persist(wannaOpen:boolean = true): void {
     if(wannaOpen) {
-        if(!digit(rootState.stateCode,1)) {
+        if(!isPersistenceActive(rootState.stateCode)) {
             // 先写入状态码，然后注册监听器，然后写入localStorage专门给刷新后和其他的同端口页面来判断
-            rootState.stateCode = setDigit(rootState.stateCode,1,1);
-            localStorage.setItem(StorageKey, String(digit(rootState.stateCode, 0)));
+            rootState.stateCode = setPersistence(rootState.stateCode, true);
+            localStorage.setItem(StorageKey, isBoundsActive(rootState.stateCode) ? '1' : '0');
             registerOtherTabsWatcher();
             console.log("now persist");
             console.log("open persistence means " +
@@ -24,10 +24,9 @@ function persist(wannaOpen:boolean = true): void {
         }
     }
     else {
-        if(digit(rootState.stateCode,1)) {
-            rootState.stateCode = setDigit(rootState.stateCode,1,0);
+        if(isPersistenceActive(rootState.stateCode)) {
+            rootState.stateCode = setPersistence(rootState.stateCode, false);
             localStorage.removeItem(StorageKey);
-            // localStorage.setItem(StorageKey, '0');
             destroyOtherTabsWatcher();
             console.log("now not persist");
         }
@@ -38,7 +37,7 @@ function persist(wannaOpen:boolean = true): void {
     }
 }
 function registerOtherTabsWatcher(): void {
-    if (digit(rootState.stateCode, 1) === 1) {
+    if (isPersistenceActive(rootState.stateCode)) {
         window.addEventListener(
             'storage',
             otherTabsWatcher
@@ -59,22 +58,22 @@ function otherTabsWatcher(e: StorageEvent): void {
     // 有值存在就一定要处理
     const v = e.newValue;
     if (v === '1') {
-        rootState.stateCode = setDigit(rootState.stateCode, 1, 1);
-        if (!digit(rootState.stateCode, 0)) {
+        rootState.stateCode = setPersistence(rootState.stateCode, true);
+        if (!isBoundsActive(rootState.stateCode)) {
             whenDomReady(on);
         }
         return;
     }
     else if (v === '0') {
-        rootState.stateCode = setDigit(rootState.stateCode, 1, 1);
-        if (digit(rootState.stateCode, 0)) {
+        rootState.stateCode = setPersistence(rootState.stateCode, true);
+        if (isBoundsActive(rootState.stateCode)) {
             whenDomReady(off);
         }
         return;
     }
     else if (v === null) {
         console.log("possibly there's a reset, try refresh");
-        rootState.stateCode = setDigit(rootState.stateCode, 1, 0);
+        rootState.stateCode = setPersistence(rootState.stateCode, false);
         destroyOtherTabsWatcher();
         return;
     }

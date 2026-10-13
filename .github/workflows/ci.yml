@@ -1,0 +1,48 @@
+# ！！！此CI文件由AI生成！！！
+
+name: CI
+
+# 触发时机：当推送到 master/main 分支，或者有人提 PR 时自动运行
+on:
+  push:
+    branches: [master, main]
+  pull_request:
+    branches: [master, main]
+
+jobs:
+  test-and-build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. 拉取仓库代码
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. 安装 pnpm
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 12
+
+      # 3. 安装 Node.js 环境并开启 pnpm 缓存
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'pnpm'
+
+      # 4. 安装项目依赖
+      - name: Install dependencies
+        run: pnpm install
+
+      # 5. 运行 TypeScript 类型检查
+      - name: Typecheck
+        run: pnpm run typecheck
+
+      # 6. 运行 Vitest 单元测试
+      - name: Run tests
+        run: pnpm test
+
+      # 7. 测试打包构建
+      - name: Build package
+        run: pnpm build

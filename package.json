@@ -1,13 +1,16 @@
 {
   "name": "boundseer",
-  "version": "0.5.3",
+  "version": "0.6.0",
   "description": "Show layout bounds on your page.",
   "private": false,
   "scripts": {
     "build": "tsdown",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "clean": "rm -rf dist",
-    "prepublishOnly": "pnpm build"
+    "prepublishOnly": "pnpm build",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:ui": "vitest --ui"
   },
   "keywords": [
     "dom",
@@ -34,10 +37,14 @@
     }
   },
   "files": [
-    "dist"
+    "dist",
+    "docs"
   ],
   "devDependencies": {
+    "@vitest/ui": "^5.0.3",
+    "jsdom": "^30.1.2",
     "tsdown": "^0.23.0",
-    "typescript": "^7.0.2"
+    "typescript": "^7.0.2",
+    "vitest": "^5.0.3"
   }
 }

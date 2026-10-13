@@ -1,4 +1,21 @@
 # Changelog 
+## [0.6.0] - 2026-10-13
+
+### Changed
+
+* state逻辑从十进制+数位判断改成二进制
+
+### Added
+
+* 加入了vitest、jsdom、@vitest/ui三个测试用开发库
+* 加入了由AI编写的vitest测试脚本
+* 加入了由AI编写的github的CI流程
+
+### fixed
+
+* reset中加入了off的条件检查
+* 修复了package.json中未包含docs/的错误
+
 ## [0.5.3] - 2026-10-11
 
 ### Added
