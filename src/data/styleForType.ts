@@ -140,7 +140,7 @@ const svgTags = [
     'use',
 ] as const
 // 明显不同的基础色相，比 360 均分更容易用肉眼区分
-const huePalette = [0, 120, 240, 60, 180, 300, 30, 150, 270, 90, 210, 330] as const
+const huePalette = [0, 210, 140, 30, 270, 180, 320, 45, 240, 165, 345, 195] as const
 function createTagStyles(
     tags: readonly string[],
     paletteOffset: number,
@@ -153,7 +153,7 @@ function createTagStyles(
             const cycle: number = Math.floor(paletteIndex / huePalette.length)
             const lightness: number = 45 + (cycle % 3) * 12
             const selector = parent ? `${parent} ${tag}` : tag
-            return `body.${ActiveClass} ${selector} { outline: 2px solid hsl(${hue} 90% ${lightness}%) !important; }`
+            return `body.${ActiveClass} ${selector} { outline: 1px solid hsl(${hue} 90% ${lightness}%) !important; box-shadow: 0 0 0 1px rgba(0,0,0,0.5) !important; }`
         }
     )
     // 使用join来拼接数组成为字符串
@@ -162,13 +162,13 @@ function createTagStyles(
 // 下面的三个语句，分别是svg、svg内部标签、其他标签
 const fullStyles = `
     body.${ActiveClass} {
-      outline: 2px solid hsl(0 90% 55%) !important;
+      outline: 1px solid hsl(0 90% 55%) !important;
     }
     body.${ActiveClass} * {
-      outline: 2px solid black !important;
+      outline: 1px solid black !important;
     }
-    ${createTagStyles(['svg'], 6)}
-    ${createTagStyles(svgTags, 6, 'svg')}
-    ${createTagStyles(htmlTags, 0)}
+    ${createTagStyles(['svg'], 114514)}
+    ${createTagStyles(svgTags, 1919810, 'svg')}
+    ${createTagStyles(htmlTags, 947947)}
 `
 export { ActiveClass, fullStyles , StyleId}
